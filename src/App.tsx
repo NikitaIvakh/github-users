@@ -4,7 +4,7 @@ import { Search } from 'components/Search/Search'
 import { UserCard } from 'components/UserCard/UserCard'
 import { defaultUser } from 'mock'
 import { useState } from 'react'
-import { GitHubError, localGitHubUser } from 'types'
+import { GitHubError, GitHubUser, localGitHubUser } from 'types'
 import { extractLocalUser } from 'utils/extract-local-user'
 import { isGitHubUser } from 'utils/typeguards'
 
@@ -16,7 +16,7 @@ function App() {
 	const fetchUser = async (username: string) => {
 		const url = BASE_URL + username
 		const response = await fetch(url)
-		const user = (await response.json()) as GitHubError | GitHubError
+		const user = (await response.json()) as GitHubUser | GitHubError
 
 		if (isGitHubUser(user)) {
 			setUser(extractLocalUser(user))
